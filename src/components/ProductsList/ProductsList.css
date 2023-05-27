@@ -1,0 +1,14 @@
+.products-list{
+    display: flex;
+    row-gap: 17px;
+    flex-direction: column;
+}
+.list-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.list-header .list-header-controls{
+    display: flex;
+    column-gap:14px ;
+}

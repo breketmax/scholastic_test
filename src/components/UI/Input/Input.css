@@ -1,0 +1,29 @@
+.breketmax-input{
+    width: 100%;
+}
+.breketmax-input input{
+    border: 1px solid var(--gray-ccc);
+    border-radius: 6px;
+    padding: 10px 15px;
+    outline: none;
+    color: var(--gray-333);
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    background-color: var(--white);
+    width: 100%;
+    box-sizing: border-box;
+}
+.breketmax-input input:focus{
+    border: 2px solid var(--gray-737);
+}
+.breketmax-input input::placeholder{
+    color: #BDBABA;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+}

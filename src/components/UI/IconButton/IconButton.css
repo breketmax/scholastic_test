@@ -1,0 +1,10 @@
+.breketmax-icon-button{
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: transparent ;
+    height: 32px;
+}
+.breketmax-icon-button:hover{
+    background-color: #F2F2F2;
+}

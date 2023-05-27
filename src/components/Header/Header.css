@@ -1,0 +1,11 @@
+.app-header-content{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows:36px;
+    padding: 27px 0;
+}
+.app-header-content img{
+    width: 130px;
+    height: auto;
+    display: block;
+}
