@@ -1,0 +1,49 @@
+.breketmax-icon-input{
+    width: 100%;
+    border: 1px solid var(--gray-ccc);
+    border-radius: 6px;
+    background-color: var(--white);
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.breketmax-icon-input input{
+    border: none;
+    border-radius: 0 6px 6px 0;
+    outline: none;
+    color: var(--gray-333);
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    background-color: transparent;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 16px 0 0;
+}
+
+.breketmax-icon-input input::placeholder{
+    color: #BDBABA;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+}
+.breketmax-icon-input.focus{
+    border: 2px solid var(--gray-737);
+}
+.breketmax-icon-input .input-icon{
+    padding:11px 9px 11px 16px ;
+}
+.breketmax-icon-input .input-icon img{
+    width: 14px;
+    height: auto;
+}
+.breketmax-icon-input .clear-input-icon{
+    padding: 11px 16px 11px 9px;
+}
+.breketmax-icon-input .clear-input-icon  img{
+    width: 14px;
+    height: auto;
+}

@@ -1,0 +1,17 @@
+.loader-wrapper{
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 90px);
+    align-items: center;
+    justify-content: center;
+}
+.loader-wrapper img{
+    transform: scale(0.5);
+}
+.local{
+    height:  50px;
+    margin-top: 20px;
+}
+.local img{
+    transform: scale(0.3);
+}

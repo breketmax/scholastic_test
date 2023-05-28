@@ -10,8 +10,6 @@ import deleteIcon from "../../assets/delete-icon.svg";
 import {priceFormatter} from "../../helpers/scripts";
 import "./ProductCard.css"
 import ModalWindow from "../ModalWindow/ModalWindow";
-import Input from "../UI/Input/Input";
-import Textarea from "../UI/Textarea/Textarea";
 import ProductForm from "../ProductForm/ProductForm";
 const ProductCard:React.FC = () => {
     const [product,setProduct] = useState<IProduct>()
@@ -35,6 +33,10 @@ const ProductCard:React.FC = () => {
     const [inputName,setName] = useState("")
     const [inputPrice,setPrice] = useState("")
     const [inputDescription, setDescription] = useState("")
+    const [disableButton, setDisableButton] = useState(false)
+    useEffect(() => {
+        setDisableButton(!(!!inputName && !!inputPrice && !!inputDescription))
+    },[inputName,inputPrice,inputDescription])
     const toggleName = (e:React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value)
     }
@@ -45,6 +47,11 @@ const ProductCard:React.FC = () => {
         setDescription(e.target.value)
     }
     const toggleEditModal = () => {
+        if(product){
+            setName(product.title)
+            setPrice(String(product.price))
+            setDescription(product.description)
+        }
         setEditModal(prevState => !prevState)
     }
     const editItem =() => {
@@ -65,12 +72,7 @@ const ProductCard:React.FC = () => {
         setProduct(getProduct(store,productId!))
     },[productId])
     useEffect(() => {
-        if(product) {
-            getImage()
-            setName(product.title)
-            setPrice(String(product.price))
-            setDescription(product.description)
-        }
+        product &&  getImage()
     },[product])
 
     return (
@@ -131,7 +133,7 @@ const ProductCard:React.FC = () => {
                         <ProductForm toggleName={toggleName} togglePrice={togglePrice} toggleDescription={toggleDescription} inputName={inputName} inputPrice={inputPrice} inputDescription={inputDescription} imageUrl={imageUrl}/>
                     }
                     footer={ <div className="control-row">
-                        <TextButton text={"update item"} onClick={editItem} size={"lg"} type={"filled"}/>
+                        <TextButton text={"update item"} onClick={editItem} size={"lg"} type={"filled"} disabled={disableButton}/>
                     </div>}/>}
         </>
     );

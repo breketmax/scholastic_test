@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {IProduct} from "../../types/types";
-import {priceFormatter} from "../../helpers/scripts";
+import {lengthValidator, onlyNumberValidator, priceFormatter, stringCutter} from "../../helpers/scripts";
 import "./ProductRow.css"
 import TextButton from "../UI/TextButton/TextButton";
 import IconButton from "../UI/IconButton/IconButton";
@@ -9,8 +9,6 @@ import ModalWindow from "../ModalWindow/ModalWindow";
 import {useAppDispatch} from "../../hooks/redux-hooks";
 import {deleteProduct, editProduct} from "../../store/slices/ProductsSlice";
 import { Link } from 'react-router-dom';
-import Textarea from "../UI/Textarea/Textarea";
-import Input from "../UI/Input/Input";
 import ProductForm from "../ProductForm/ProductForm";
 
 const ProductRow:React.FC<IProduct> = ({id,description,price,imageSrc,title}) => {
@@ -31,6 +29,10 @@ const ProductRow:React.FC<IProduct> = ({id,description,price,imageSrc,title}) =>
     const [inputName,setName] = useState("")
     const [inputPrice,setPrice] = useState("")
     const [inputDescription, setDescription] = useState("")
+    const [disableButton, setDisableButton] = useState(false)
+    useEffect(() => {
+        setDisableButton(!(!!inputName && !!inputPrice && !!inputDescription))
+    },[inputName,inputPrice,inputDescription])
     const toggleName = (e:React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value)
     }
@@ -42,6 +44,9 @@ const ProductRow:React.FC<IProduct> = ({id,description,price,imageSrc,title}) =>
     }
 
     const toggleEditModal = () => {
+        setName(title)
+        setPrice(String(price))
+        setDescription(description)
         setEditModal(prevState => !prevState)
     }
     const editItem =() => {
@@ -59,9 +64,6 @@ const ProductRow:React.FC<IProduct> = ({id,description,price,imageSrc,title}) =>
 
     useEffect(() =>{
         getImage()
-        setName(title)
-        setPrice(String(price))
-        setDescription(description)
     },[])
     return (
         <>
@@ -71,7 +73,7 @@ const ProductRow:React.FC<IProduct> = ({id,description,price,imageSrc,title}) =>
             </div>
             <div className="product-item-description">
                 <Link to={`product/${id}`}><h3>{title}</h3></Link>
-                <p>{description}</p>
+                <p>{stringCutter(description)}</p>
             </div>
             <div className="product-item-control">
                 <span className="span-id">
@@ -108,7 +110,7 @@ const ProductRow:React.FC<IProduct> = ({id,description,price,imageSrc,title}) =>
                        <ProductForm toggleName={toggleName} togglePrice={togglePrice} toggleDescription={toggleDescription} inputName={inputName} inputPrice={inputPrice} inputDescription={inputDescription} imageUrl={imageUrl}/>
                     }
                     footer={ <div className="control-row">
-                        <TextButton text={"update item"} onClick={editItem} size={"lg"} type={"filled"}/>
+                        <TextButton text={"update item"} onClick={editItem} size={"lg"} type={"filled"} disabled={disableButton}/>
                     </div>}/>}
         </>
     );

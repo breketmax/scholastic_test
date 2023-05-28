@@ -7,6 +7,7 @@ import {IProduct} from "../../types/types";
 import TextButton from "../UI/TextButton/TextButton";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import ProductForm from "../ProductForm/ProductForm";
+import Loader from "../Loader/Loader";
 const ProductsList:React.FC = () => {
     const observerTarget = useRef<HTMLDivElement>(null)
 
@@ -14,12 +15,15 @@ const ProductsList:React.FC = () => {
     const [products,setProducts] = useState<IProduct[]>([])
     const [page,setPage] = useState(1)
     const [isFetching,setIsFetching] = useState(false)
-    const [isEmpty, setIsEmpty] = useState(false)
     const dispatch = useAppDispatch()
     const [createModal,setCreateModal] = useState(false)
     const [inputName,setName] = useState("")
     const [inputPrice,setPrice] = useState("")
     const [inputDescription, setDescription] = useState("")
+    const [disableButton, setDisableButton] = useState(false)
+    useEffect(() => {
+        setDisableButton(!(!!inputName && !!inputPrice && !!inputDescription))
+    },[inputName,inputPrice,inputDescription])
     const toggleName = (e:React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value)
     }
@@ -30,6 +34,9 @@ const ProductsList:React.FC = () => {
         setDescription(e.target.value)
     }
     const toggleCreateModal = () => {
+        setName("")
+        setPrice("")
+        setDescription("")
         setCreateModal(prevState => !prevState)
     }
 
@@ -67,7 +74,6 @@ const ProductsList:React.FC = () => {
     const fetchMoreProducts = () => {
         setTimeout(() => {
             const sortedProducts = sortProducts(state,page)
-            if(sortedProducts.length < 5) setIsEmpty(true)
             setProducts(prevState => [...prevState,...sortedProducts])
             setIsFetching(false)
         },2500)
@@ -87,11 +93,11 @@ const ProductsList:React.FC = () => {
             </div>
             <div className="products-list">
                 {products.map((product) => (
-                    <ProductRow {...product} />
+                    <ProductRow {...product} key={product.id}/>
                 ))}
             </div>
             <div ref={observerTarget} />
-            {isFetching && <p>loading...</p>}
+            {isFetching && <Loader type="local"/>}
 
 
             {createModal &&
@@ -110,7 +116,7 @@ const ProductsList:React.FC = () => {
                             imageUrl={require(`../../assets/products/default.png`)}/>
                     }
                     footer={ <div className="control-row">
-                        <TextButton text={"create item"} onClick={createItem} size={"lg"} type={"filled"}/>
+                        <TextButton text={"create item"} onClick={createItem} size={"lg"} type={"filled"} disabled={disableButton}/>
                     </div>}/>}
         </>
 

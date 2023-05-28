@@ -12,6 +12,7 @@
 .product-card-header{
     display: flex;
     column-gap: 30px;
+    align-items: center;
 }
 .product-card-body{
     display: grid;

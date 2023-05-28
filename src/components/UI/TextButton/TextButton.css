@@ -39,3 +39,9 @@
     padding-right: 32px;
     border-radius: 3px;
 }
+button.breketmax-text-button:disabled{
+    cursor: pointer;
+    pointer-events: none;
+    background-color: var(--gray-ccc);
+    opacity: 0.7;
+}

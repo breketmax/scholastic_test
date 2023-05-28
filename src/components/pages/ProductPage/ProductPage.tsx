@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux-hooks";
 import {toggleFetching} from "../../../store/slices/ProductsSlice";
 import ProductCard from "../../ProductCard/ProductCard";
+import Loader from "../../Loader/Loader";
 
 const ProductPage:React.FC = () => {
     const {isFetching} = useAppSelector((state) => state.products)
@@ -16,7 +17,7 @@ const ProductPage:React.FC = () => {
     return (
         <div className="container">
             <div className="product-wrapper">
-                {isFetching ? <p>Loading...</p> :  <ProductCard />}
+                {isFetching ? <Loader/> :  <ProductCard />}
             </div>
         </div>
     );

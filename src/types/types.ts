@@ -3,6 +3,7 @@ import React from "react";
 export interface IProducts{
     items:IProduct[]
     isFetching:boolean
+    searchingQuery:string
 }
 
 export interface  IProduct{
@@ -23,7 +24,7 @@ export interface ITextButton{
     size: "sm" | "md" | "lg"
     type: "outline" | "filled"
     children?:React.ReactNode
-
+    disabled?:boolean
 }
 export interface IIconButton{
     children:React.ReactNode
@@ -42,6 +43,15 @@ export interface IInput {
     placeholder:string
     onChange:React.ChangeEventHandler<HTMLInputElement>
     value:string
+}
+
+export interface IIconInput {
+    placeholder:string
+    onChange:React.ChangeEventHandler<HTMLInputElement>
+    value:string
+    icon:React.ReactNode
+    iconAction:() => void
+    clearInput:() => void
 }
 export interface ITextarea {
     placeholder:string
