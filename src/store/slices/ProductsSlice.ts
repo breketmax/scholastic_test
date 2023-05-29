@@ -51,12 +51,15 @@ export const productSlice = createSlice({
 })
 
 export const sortProducts = (state: RootState,page : number) => {
+
     const copy = [...state.products.items]
      copy.sort((a,b) =>  {
         if(a.id > b.id) return 1
         return -1
     })
+
     return copy.filter(item => item.title.toLowerCase().includes(state.products.searchingQuery.toLowerCase())).slice((page-1) * 5, page* 5)
+
 }
 export const getProduct = (state: RootState,id : string):IProduct => {
     return state.products.items.filter((item) => item.id === Number(id))[0]

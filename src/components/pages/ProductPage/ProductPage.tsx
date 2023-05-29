@@ -11,7 +11,7 @@ const ProductPage:React.FC = () => {
         if(isFetching){
             setTimeout(() => {
                 dispatch(toggleFetching())
-            },500)
+            },2500)
         }
     },[isFetching])
     return (

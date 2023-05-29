@@ -5,13 +5,13 @@ import {toggleFetching} from "../../../store/slices/ProductsSlice";
 import Loader from "../../Loader/Loader";
 
 const ProductsPage:React.FC = () => {
-    const {isFetching,searchingQuery} = useAppSelector((state) => state.products)
+    const {isFetching} = useAppSelector((state) => state.products)
     const dispatch = useAppDispatch()
     useEffect(() => {
         if(isFetching){
             setTimeout(() => {
                 dispatch(toggleFetching())
-            },500)
+            },2500)
         }
     },[isFetching])
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {IProduct} from "../../types/types";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
 import {deleteProduct, editProduct, getProduct} from "../../store/slices/ProductsSlice";
 import TextButton from "../UI/TextButton/TextButton";
@@ -67,7 +67,10 @@ const ProductCard:React.FC = () => {
         toggleDeleteModal()
         navigate("/")
     }
-    
+    const backToList = () => {
+        if(store.products.searchingQuery) return navigate(`/?search=${store.products.searchingQuery}`)
+        navigate("/")
+    }
     useEffect(() => {
         setProduct(getProduct(store,productId!))
     },[productId])
@@ -79,11 +82,9 @@ const ProductCard:React.FC = () => {
         <>
             <div className="product-card-wrapper">
             <div className="product-card-header">
-                <Link to={"/"}>
-                    <TextButton text={"back"}  size={"sm"} type={"outline"}>
+                    <TextButton text={"back"}  size={"sm"} type={"outline"} onClick={backToList}>
                         <img src={backArrow} alt="backArrow" />
                     </TextButton>
-                </Link>
                 <h2>{product?.title}</h2>
             </div>
             <div className="product-card-body">

@@ -11,7 +11,6 @@ function App() {
     const {items} = useAppSelector(state => state.products)
     useEffect(() => {
         if(!localStorage.items){
-            console.log("noLOCal")
             localStorage.items = JSON.stringify(tempData)
         }
         dispatch(setItems(localStorage.items))
